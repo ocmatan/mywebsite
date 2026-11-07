@@ -1,1 +1,877 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>אימון להכתבה באנגלית</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
 
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            direction: rtl;
+        }
+
+        header {
+            background-color: #1e293b;
+            border-bottom: 2px solid #334155;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title-area h1 {
+            font-size: 1.1rem;
+            color: #c084fc;
+        }
+
+        .title-area p {
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .score-pill {
+            background: #2563eb;
+            color: #ffffff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .btn-home {
+            background: #334155;
+            color: white;
+            border: 1px solid #475569;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            margin-right: 6px;
+        }
+
+        .btn-fullscreen {
+            background: #8b5cf6;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            margin-right: 6px;
+            font-weight: bold;
+        }
+
+        main {
+            flex: 1;
+            max-width: 480px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .view-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .view-screen.active {
+            display: flex;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            color: #f1f5f9;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+
+        .sub-text {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .words-box {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 12px;
+            width: 100%;
+            margin-bottom: 16px;
+            text-align: center;
+            direction: ltr;
+            font-size: 0.85rem;
+            color: #38bdf8;
+            line-height: 1.5;
+        }
+
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .menu-btn {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: right;
+            cursor: pointer;
+            color: white;
+        }
+
+        .menu-btn:active {
+            background: #2563eb;
+            border-color: #60a5fa;
+        }
+
+        .menu-btn .tag {
+            background: rgba(192, 132, 252, 0.2);
+            color: #c084fc;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+
+        .menu-btn h3 {
+            font-size: 1.1rem;
+            color: #38bdf8;
+            margin-bottom: 4px;
+        }
+
+        .menu-btn p {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+        }
+
+        .card-container {
+            width: 100%;
+            height: 180px;
+            background: #1e293b;
+            border: 2px solid #38bdf8;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            margin: 14px 0;
+            padding: 16px;
+        }
+
+        .card-en {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #38bdf8;
+            direction: ltr;
+        }
+
+        .card-he {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #f43f5e;
+        }
+
+        .controls-row {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .action-btn {
+            flex: 1;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .action-btn:active {
+            opacity: 0.8;
+        }
+
+        .btn-purple {
+            background: #8b5cf6;
+        }
+
+        .quiz-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 14px;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 14px;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .opt-btn {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: white;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .opt-btn:active {
+            border-color: #38bdf8;
+            background: #334155;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.3rem;
+            border-radius: 10px;
+            border: 2px solid #8b5cf6;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            direction: ltr;
+            margin: 14px 0;
+            outline: none;
+        }
+
+        .msg-box {
+            margin-top: 12px;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            display: none;
+        }
+
+        .msg-success {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+        }
+
+        .msg-error {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+        }
+
+        .rain-board {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            background: #020617;
+            border: 2px solid #334155;
+            border-radius: 14px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .slots-row {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            direction: ltr;
+            margin: 10px 0;
+        }
+
+        .slot-item {
+            width: 32px;
+            height: 38px;
+            border: 2px solid #eab308;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            background: #0f172a;
+            color: #fef08a;
+        }
+
+        .slot-item.done {
+            background: #22c55e;
+            border-color: #4ade80;
+            color: white;
+        }
+
+        .falling-bubble {
+            position: absolute;
+            width: 42px;
+            height: 42px;
+            background: #6366f1;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            direction: ltr;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            user-select: none;
+        }
+
+        .counter {
+            color: #a855f7;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="title-area">
+            <h1>אימון להכתבה באנגלית</h1>
+            <p>Cool Schools | Part 2 • 09.11.2026</p>
+        </div>
+        <div style="display: flex; align-items: center;">
+            <button class="btn-fullscreen" onclick="toggleFullScreen()">⛶ מסך מלא</button>
+            <button class="btn-home" onclick="navTo('menu')">תפריט 🏠</button>
+            <div class="score-pill">⭐ <span id="score-val">0</span></div>
+        </div>
+    </header>
+
+    <main>
+        <!-- MENU -->
+        <div id="view-menu" class="view-screen active">
+            <h2>בחר משחקון</h2>
+            <p class="sub-text">תירגול 12 המילים להכתבה ברמות שונות</p>
+
+            <div class="words-box">
+                <b>המילים להכתבה:</b><br>
+                about, classroom, dining room, every, forty, other, special, student, study, their, trip, wait
+            </div>
+
+            <div class="menu-list">
+                <div class="menu-btn" onclick="navTo('learn')">
+                    <span class="tag">שלב 1</span>
+                    <h3>1. הכרת המילים (כרטיסיות)</h3>
+                    <p>הפיכת כרטיסיות, השמעת היגוי ותרגום בעברית.</p>
+                </div>
+
+                <div class="menu-btn" onclick="navTo('trivia')">
+                    <span class="tag">שלב 2</span>
+                    <h3>2. מציאת התרגום הנכון</h3>
+                    <p>מוצגת מילה באנגלית - בחר את התרגום המדויק בעברית.</p>
+                </div>
+
+                <div class="menu-btn" onclick="navTo('spelling')">
+                    <span class="tag">שלב 3</span>
+                    <h3>3. כתיבת המילה באנגלית</h3>
+                    <p>מוצגת המילה בעברית - הקלד אותה בדייקנות באנגלית.</p>
+                </div>
+
+                <div class="menu-btn" onclick="navTo('rain')">
+                    <span class="tag">שלב 4</span>
+                    <h3>4. תפסן האותיות הנופלות</h3>
+                    <p>אותיות באנגלית נופלות, תפוס אותן לפי סדר ה-Spelling.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1. LEARN FLASHCARDS -->
+        <div id="view-learn" class="view-screen">
+            <h2>כרטיסיות זיכרון</h2>
+            <div class="counter" id="learn-idx-txt">1 / 12</div>
+            <p class="sub-text">לחץ על הכרטיס כדי לראות את התרגום בעברית</p>
+
+            <div class="card-container" id="flash-card-el" onclick="toggleCard()">
+                <div id="card-side-front">
+                    <div class="card-en" id="learn-word-en">about</div>
+                    <div style="font-size: 0.75rem; color: #64748b; margin-top: 10px; text-align: center;">לחץ להפיכה 🔄</div>
+                </div>
+                <div id="card-side-back" style="display: none; text-align: center;">
+                    <div class="card-he" id="learn-word-he">על</div>
+                    <div style="color: #cbd5e1; direction: ltr; margin-top: 6px;" id="learn-word-sub">about</div>
+                </div>
+            </div>
+
+            <div class="controls-row">
+                <button class="action-btn" onclick="changeLearn(-1)">הקודם</button>
+                <button class="action-btn btn-purple" onclick="speakCurrentWord()">🔊 השמע</button>
+                <button class="action-btn" onclick="changeLearn(1)">הבא</button>
+            </div>
+        </div>
+
+        <!-- 2. TRIVIA -->
+        <div id="view-trivia" class="view-screen">
+            <h2>מציאת התרגום הנכון</h2>
+            <div class="counter" id="trivia-idx-txt">1 / 12</div>
+
+            <div class="quiz-card">
+                <div class="card-en" id="trivia-target-en">classroom</div>
+                <button class="action-btn btn-purple" style="margin-top: 10px; padding: 6px 16px;" onclick="speakTriviaWord()">🔊 השמע</button>
+            </div>
+
+            <div class="options-list" id="trivia-options-box"></div>
+            <div class="msg-box" id="trivia-msg"></div>
+        </div>
+
+        <!-- 3. SPELLING -->
+        <div id="view-spelling" class="view-screen">
+            <h2>כתיבת המילה באנגלית</h2>
+            <div class="counter" id="spelling-idx-txt">1 / 12</div>
+
+            <div class="quiz-card">
+                <span style="color: #94a3b8; font-size: 0.85rem;">המילה בעברית:</span>
+                <div class="card-he" id="spelling-target-he" style="margin: 8px 0;">כיתה</div>
+
+                <input type="text" id="spelling-input-field" class="text-input" placeholder="הקלד באנגלית..." autocomplete="off">
+
+                <div class="controls-row">
+                    <button class="action-btn" onclick="checkSpellingAns()">בדוק תשובה ✓</button>
+                    <button class="action-btn btn-purple" style="max-width: 60px;" onclick="speakSpellingWord()">🔊</button>
+                </div>
+                <div id="spelling-hint-txt" style="color: #fde047; font-size: 0.85rem; margin-top: 10px;"></div>
+            </div>
+
+            <div class="msg-box" id="spelling-msg"></div>
+        </div>
+
+        <!-- 4. RAIN GAME -->
+        <div id="view-rain" class="view-screen">
+            <h2>תפסן האותיות הנופלות</h2>
+
+            <div style="text-align: center;">
+                <span style="color: #94a3b8; font-size: 0.85rem;">המילה בעברית:</span>
+                <h3 id="rain-target-he" style="color: #fde047; font-size: 1.5rem;">תלמיד</h3>
+            </div>
+
+            <div class="slots-row" id="rain-slots-container"></div>
+
+            <div class="rain-board" id="rain-board-area">
+                <div id="rain-play-btn" style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; background: rgba(15, 23, 42, 0.95); gap: 12px;">
+                    <p style="color: #cbd5e1; font-weight: bold; font-size: 0.95rem;">בחר מהירות נפילה:</p>
+                    <div style="display: flex; gap: 8px; width: 100%;">
+                        <button class="action-btn" style="background: #10b981;" onclick="setRainSpeed(2)">🐢 איטי</button>
+                        <button class="action-btn" style="background: #3b82f6;" onclick="setRainSpeed(3.6)">🚶 בינוני</button>
+                        <button class="action-btn" style="background: #ef4444;" onclick="setRainSpeed(5.6)">🚀 מהיר</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Dictionary array
+        const vocab = [
+            { id: 1,  en: "about",       he: "על" },
+            { id: 2,  en: "classroom",   he: "כיתה" },
+            { id: 3,  en: "dining room", he: "חדר אוכל" },
+            { id: 4,  en: "every",       he: "כל" },
+            { id: 5,  en: "forty",       he: "ארבעים" },
+            { id: 6,  en: "other",       he: "אחר" },
+            { id: 7,  en: "special",     he: "מיוחד" },
+            { id: 8,  en: "student",     he: "תלמיד" },
+            { id: 9,  en: "study",       he: "ללמוד" },
+            { id: 10, en: "their",       he: "שלהם, שלהן" },
+            { id: 11, en: "trip",        he: "מסע, טיול" },
+            { id: 12, en: "wait",        he: "לחכות, להמתין" }
+        ];
+
+        let currentScore = 0;
+        let lIdx = 0;
+        let isFlipped = false;
+
+        let tList = [];
+        let tIdx = 0;
+
+        let sList = [];
+        let sIdx = 0;
+
+        let rList = [];
+        let rIdx = 0;
+        let rCharIdx = 0;
+        let rTimer = null;
+        let rActive = false;
+        let rLetters = [];
+        let rSpeedMultiplier = 3.6;
+
+        function addScore(n) {
+            currentScore += n;
+            document.getElementById('score-val').innerText = currentScore;
+        }
+
+        function playSound(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = 'en-US';
+                u.rate = 0.85;
+                window.speechSynthesis.speak(u);
+            }
+        }
+
+        function shuffle(arr) {
+            return [...arr].sort(() => Math.random() - 0.5);
+        }
+
+        function navTo(screenId) {
+            stopRainEngine();
+            document.querySelectorAll('.view-screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('view-' + screenId).classList.add('active');
+
+            if (screenId === 'learn') renderLearn();
+            if (screenId === 'trivia') setupTrivia();
+            if (screenId === 'spelling') setupSpelling();
+            if (screenId === 'rain') resetRainScreen();
+        }
+
+        /* 1. LEARN */
+        function renderLearn() {
+            isFlipped = false;
+            document.getElementById('card-side-front').style.display = 'block';
+            document.getElementById('card-side-back').style.display = 'none';
+
+            const item = vocab[lIdx];
+            document.getElementById('learn-word-en').innerText = item.en;
+            document.getElementById('learn-word-he').innerText = item.he;
+            document.getElementById('learn-word-sub').innerText = item.en;
+            document.getElementById('learn-idx-txt').innerText = (lIdx + 1) + ' / ' + vocab.length;
+        }
+
+        function toggleCard() {
+            isFlipped = !isFlipped;
+            document.getElementById('card-side-front').style.display = isFlipped ? 'none' : 'block';
+            document.getElementById('card-side-back').style.display = isFlipped ? 'block' : 'none';
+        }
+
+        function changeLearn(dir) {
+            lIdx = (lIdx + dir + vocab.length) % vocab.length;
+            renderLearn();
+        }
+
+        function speakCurrentWord() {
+            playSound(vocab[lIdx].en);
+        }
+
+        /* 2. TRIVIA */
+        function setupTrivia() {
+            tList = shuffle(vocab);
+            tIdx = 0;
+            loadTriviaQuestion();
+        }
+
+        function loadTriviaQuestion() {
+            const msg = document.getElementById('trivia-msg');
+            msg.style.display = 'none';
+
+            if (tIdx >= tList.length) {
+                document.getElementById('trivia-target-en').innerText = "סיימת בהצלחה! 🏆";
+                document.getElementById('trivia-options-box').innerHTML = '<button class="action-btn" onclick="setupTrivia()">שחק שוב</button>';
+                return;
+            }
+
+            const curr = tList[tIdx];
+            document.getElementById('trivia-target-en').innerText = curr.en;
+            document.getElementById('trivia-idx-txt').innerText = (tIdx + 1) + ' / ' + tList.length;
+            playSound(curr.en);
+
+            let wrong = vocab.filter(v => v.id !== curr.id);
+            wrong = shuffle(wrong).slice(0, 3);
+            let opts = shuffle([curr, ...wrong]);
+
+            const box = document.getElementById('trivia-options-box');
+            box.innerHTML = '';
+
+            opts.forEach(o => {
+                const b = document.createElement('button');
+                b.className = 'opt-btn';
+                b.innerText = o.he;
+                b.onclick = function() {
+                    if (o.id === curr.id) {
+                        msg.className = 'msg-box msg-success';
+                        msg.style.display = 'block';
+                        msg.innerText = 'תשובה נכונה! ✨ (+10)';
+                        addScore(10);
+                        setTimeout(() => { tIdx++; loadTriviaQuestion(); }, 1000);
+                    } else {
+                        msg.className = 'msg-box msg-error';
+                        msg.style.display = 'block';
+                        msg.innerText = 'תשובה לא נכונה, נסה שוב! ❌';
+                    }
+                };
+                box.appendChild(b);
+            });
+        }
+
+        function speakTriviaWord() {
+            if (tList[tIdx]) playSound(tList[tIdx].en);
+        }
+
+        /* 3. SPELLING */
+        function setupSpelling() {
+            sList = shuffle(vocab);
+            sIdx = 0;
+            loadSpellingQuestion();
+        }
+
+        function loadSpellingQuestion() {
+            const msg = document.getElementById('spelling-msg');
+            msg.style.display = 'none';
+
+            if (sIdx >= sList.length) {
+                document.getElementById('spelling-target-he').innerText = "אלופה/אלוף! סיימת!";
+                document.getElementById('spelling-input-field').style.display = 'none';
+                msg.className = 'msg-box msg-success';
+                msg.style.display = 'block';
+                msg.innerText = 'שולט בכל המילים בהכתבה! 🎉';
+                return;
+            }
+
+            const curr = sList[sIdx];
+            document.getElementById('spelling-target-he').innerText = curr.he;
+            document.getElementById('spelling-idx-txt').innerText = (sIdx + 1) + ' / ' + sList.length;
+
+            const input = document.getElementById('spelling-input-field');
+            input.style.display = 'block';
+            input.value = '';
+
+            document.getElementById('spelling-hint-txt').innerText = "💡 רמז: מתחיל ב-'" + curr.en[0].toUpperCase() + "' (" + curr.en.length + " אותיות)";
+        }
+
+        function checkSpellingAns() {
+            const input = document.getElementById('spelling-input-field');
+            const val = input.value.trim().toLowerCase();
+            const target = sList[sIdx].en.toLowerCase();
+            const msg = document.getElementById('spelling-msg');
+
+            if (val === target) {
+                msg.className = 'msg-box msg-success';
+                msg.style.display = 'block';
+                msg.innerText = 'נכון מאוד! כל הכבוד 🎉 (+15)';
+                playSound(target);
+                addScore(15);
+                setTimeout(() => { sIdx++; loadSpellingQuestion(); }, 1200);
+            } else {
+                msg.className = 'msg-box msg-error';
+                msg.style.display = 'block';
+                msg.innerText = 'לא מדויק. התשובה הנכונה: ' + target;
+            }
+        }
+
+        function speakSpellingWord() {
+            if (sList[sIdx]) playSound(sList[sIdx].en);
+        }
+
+        document.getElementById('spelling-input-field').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') checkSpellingAns();
+        });
+
+        /* 4. RAIN GAME */
+        function resetRainScreen() {
+            stopRainEngine();
+            document.getElementById('rain-board-area').innerHTML = `
+                <div id="rain-play-btn" style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; background: rgba(15, 23, 42, 0.95); gap: 12px;">
+                    <p style="color: #cbd5e1; font-weight: bold; font-size: 0.95rem;">בחר מהירות נפילה:</p>
+                    <div style="display: flex; gap: 8px; width: 100%;">
+                        <button class="action-btn" style="background: #10b981;" onclick="setRainSpeed(2)">🐢 איטי</button>
+                        <button class="action-btn" style="background: #3b82f6;" onclick="setRainSpeed(3.6)">🚶 בינוני</button>
+                        <button class="action-btn" style="background: #ef4444;" onclick="setRainSpeed(5.6)">🚀 מהיר</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function setRainSpeed(speed) {
+            rSpeedMultiplier = speed;
+            startRainPlay();
+        }
+
+        function startRainPlay() {
+            rList = shuffle(vocab);
+            rIdx = 0;
+            rActive = true;
+            document.getElementById('rain-board-area').innerHTML = '';
+            nextRainItem();
+        }
+
+        function stopRainEngine() {
+            rActive = false;
+            if (rTimer) clearInterval(rTimer);
+            rLetters.forEach(item => { if (item.el) item.el.remove(); });
+            rLetters = [];
+        }
+
+        function nextRainItem() {
+            rLetters.forEach(item => { if (item.el) item.el.remove(); });
+            rLetters = [];
+
+            if (rIdx >= rList.length) {
+                document.getElementById('rain-target-he').innerText = "ניצחת במשחק! 🏆";
+                document.getElementById('rain-slots-container').innerHTML = "<b>כל הכבוד!</b>";
+                stopRainEngine();
+                return;
+            }
+
+            const curr = rList[rIdx];
+            rCharIdx = 0;
+            document.getElementById('rain-target-he').innerText = curr.he;
+
+            const slots = document.getElementById('rain-slots-container');
+            slots.innerHTML = '';
+
+            for (let i = 0; i < curr.en.length; i++) {
+                const div = document.createElement('div');
+                div.className = 'slot-item';
+                div.id = 'r-slot-' + i;
+                div.innerText = curr.en[i] === ' ' ? ' ' : '_';
+                slots.appendChild(div);
+            }
+
+            if (rTimer) clearInterval(rTimer);
+            rTimer = setInterval(updateRainFrame, 40);
+        }
+
+        let tick = 0;
+        function updateRainFrame() {
+            if (!rActive) return;
+
+            const board = document.getElementById('rain-board-area');
+            const bWidth = board.clientWidth || 300;
+            const bHeight = board.clientHeight || 280;
+
+            tick++;
+            if (tick % 25 === 0) {
+                spawnFallingChar(bWidth);
+            }
+
+            for (let i = rLetters.length - 1; i >= 0; i--) {
+                const item = rLetters[i];
+                item.y += item.speed;
+                item.el.style.top = item.y + 'px';
+
+                if (item.y > bHeight) {
+                    item.el.remove();
+                    rLetters.splice(i, 1);
+                }
+            }
+        }
+
+        function spawnFallingChar(bWidth) {
+            const currObj = rList[rIdx];
+            if (!currObj) return;
+
+            const targetWord = currObj.en.toLowerCase();
+            if (rCharIdx >= targetWord.length) return;
+
+            if (targetWord[rCharIdx] === ' ') {
+                const slot = document.getElementById('r-slot-' + rCharIdx);
+                if (slot) { slot.innerText = ' '; slot.className = 'slot-item done'; }
+                rCharIdx++;
+                if (rCharIdx >= targetWord.length) {
+                    finishRainWord();
+                    return;
+                }
+            }
+
+            let charToSpawn = targetWord[rCharIdx];
+            if (Math.random() > 0.5) {
+                const alphabet = "abcdefghijklmnopqrstuvwxyz";
+                charToSpawn = alphabet[Math.floor(Math.random() * alphabet.length)];
+            }
+
+            const board = document.getElementById('rain-board-area');
+            const el = document.createElement('div');
+            el.className = 'falling-bubble';
+            el.innerText = charToSpawn;
+
+            const x = Math.max(10, Math.random() * (bWidth - 50));
+            el.style.left = x + 'px';
+            el.style.top = '-45px';
+
+            const obj = { el: el, char: charToSpawn, y: -45, speed: (1.0 + Math.random() * 1.0) * rSpeedMultiplier };
+
+            el.onclick = function() {
+                const needed = targetWord[rCharIdx];
+                if (charToSpawn === needed) {
+                    const slot = document.getElementById('r-slot-' + rCharIdx);
+                    if (slot) {
+                        slot.innerText = currObj.en[rCharIdx];
+                        slot.className = 'slot-item done';
+                    }
+                    el.remove();
+                    rLetters = rLetters.filter(l => l !== obj);
+                    rCharIdx++;
+                    addScore(5);
+
+                    if (rCharIdx >= targetWord.length) {
+                        finishRainWord();
+                    }
+                } else {
+                    el.style.background = '#ef4444';
+                }
+            };
+
+            board.appendChild(el);
+            rLetters.push(obj);
+        }
+
+        function finishRainWord() {
+            playSound(rList[rIdx].en);
+            addScore(10);
+            setTimeout(() => {
+                rIdx++;
+                nextRainItem();
+            }, 800);
+        }
+
+        window.onload = function() {
+            navTo('menu');
+        };
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.webkitRequestFullscreen) {
+                    document.documentElement.webkitRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
